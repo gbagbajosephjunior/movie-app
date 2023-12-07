@@ -1,0 +1,16 @@
+<div class="card-container" *ngIf="movie">
+  <div class="card">
+    <img [src]="movie.thumbnailUrl" alt="{{ movie.title }} thumbnail">
+    <h3>{{ movie.title }}</h3>
+    <p><strong>Release Date:</strong>{{ movie.releasedDate }}</p>
+    <p><strong>Description:</strong>{{ movie.description }}</p>
+    <p><strong>Duration:</strong>{{ movie.duration }}</p>
+    <p><strong>Genre:</strong> {{ movie.genre.join(', ') }}</p>
+    
+    <div *ngIf="safeTrailerUrl" class="video-container">
+      <iframe width="560" height="315" [src]="safeTrailerUrl" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+  

@@ -1,0 +1,35 @@
+
+<div class="movie-card-header">
+  <div class="movie-card-search">
+    <input type="text" placeholder="Search by title" [(ngModel)]="searchText" (input)="searchMovies()" class="movie-card-searchbar">
+      <select [(ngModel)]="selectedGenre" (change)="filterByGenre()" class="movie-card-genre">
+        <option value="">All Genres</option>
+        <option value="Action">Action</option>
+        <option value="Animation">Animation</option>
+      </select>
+  </div>
+  
+  <div class="movie-card-click">
+    <button (click)="sortMovies('title')" class="movie-card-btn">Sort by Title</button>
+    <button (click)="sortMovies('releaseDate')" class="movie-card-btn-1">Sort by Release Date</button>
+  </div>
+ 
+</div>
+
+
+<div class="movie-card-container">
+  <div class="movie-card" *ngFor="let movie of sortedMovies">
+    <a class="anchor" [routerLink]="['/movie', movie.id]">
+      <img [src]="movie.thumbnailUrl" alt="{{ movie.title }} thumbnail">
+      <h3>{{ movie.title }}</h3>
+      <p><strong>Release Date:</strong>{{ movie.releasedDate }}</p>
+      <p><strong>Description:</strong>{{ movie.description }}</p>
+      <p><strong>Duration:</strong>{{ movie.duration }}</p>
+      <p><strong>Genre:</strong> {{ movie.genre.join(', ') }}</p>
+      <button (click)="toggleWatchlist(movie)">
+        {{ watchlist.includes(movie.title) ? 'Remove from Watchlist' : 'Add to Watchlist' }}
+      </button>
+      <span *ngIf="watchlist.includes(movie.title)">On my Watchlist</span>
+    </a>
+  </div>
+</div>
